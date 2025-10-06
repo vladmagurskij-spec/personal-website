@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Лабораторна робота №1 — Форма реєстрації</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; max-width:800px; margin:2rem auto; padding:0 1rem; line-height:1.5; }
+    label { display:block; margin-top:0.75rem; }
+    input, select { display:block; margin-top:0.25rem; padding:0.5rem; width:100%; max-width:400px; box-sizing:border-box; }
+    .row { display:flex; gap:1rem; flex-wrap:wrap; }
+    .row > div { flex:1 1 220px; }
+    .note { font-size:0.9rem; color:#555; }
+    .actions { margin-top:1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Лабораторна робота №1 — Форма реєстрації</h1>
+    <p class="note">Див. лабораторне: <a id="labsLink" href="https://classroom.google.com/u/0/w/NzgwMjk0NzgwNjA1/t/all?hl=ru" target="_blank">Список лабораторних</a></p>
+  </header>
+
+  <form id="registrationForm" action="https://webhook.site/75fa0aff-18c4-4336-acde-6374b6be37ce" method="post" novalidate>
+    <fieldset>
+      <legend>Реєстрація користувача</legend>
+
+      <div class="row">
+        <div>
+          <label for="firstName">Ім'я <span aria-hidden="true">*</span></label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+
+        <div>
+          <label for="lastName">Прізвище <span aria-hidden="true">*</span></label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+      </div>
+
+      <label for="email">Електронна пошта <span aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" required />
+
+      <div class="row">
+        <div>
+          <label for="password">Пароль <span aria-hidden="true">*</span></label>
+          <input type="password" id="password" name="password" required minlength="6" />
+        </div>
+
+        <div>
+          <label for="confirmPassword">Підтвердження паролю <span aria-hidden="true">*</span></label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" />
+        </div>
+      </div>
+
+      <label for="birthdate">Дата народження</label>
+      <input type="date" id="birthdate" name="birthdate" />
+
+      <label for="gender">Стать</label>
+      <select id="gender" name="gender">
+        <option value="">-- оберіть --</option>
+        <option value="male">Чоловіча</option>
+        <option value="female">Жіноча</option>
+        <option value="other">Інша</option>
+        <option value="prefer_not">Краще не казати</option>
+      </select>
+
+      <div class="actions">
+        <input type="submit" value="Зареєструватися" />
+      </div>
+
+    </fieldset>
+  </form>
+
+  <script>
+    // Простенька клієнтська перевірка — зупиняє відправлення якщо паролі не співпадають.
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+      var pw = document.getElementById('password').value;
+      var cpw = document.getElementById('confirmPassword').value;
+      if (pw !== cpw) {
+        e.preventDefault();
+        alert('Паролі не співпадають. Будь ласка, перевірте.');
+        document.getElementById('confirmPassword').focus();
+        return false;
+      }
+    });
+  </script>
+
+  <footer style="margin-top:2rem; font-size:0.9rem; color:#666;">
+    <p>Файл згенеровано для лабораторної. Використано реальні посилання.</p>
+  </footer>
+</body>
+</html>
